@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TestAPI5.Models;
 
 namespace TestAPI5.Controllers
@@ -16,15 +16,34 @@ namespace TestAPI5.Controllers
         public TodoItemsController(TodoContext context)
         {
             _context = context;
+
+
         }
 
         // GET: api/TodoItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
-            return await _context.TodoItems
+            var items = await _context.TodoItems
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
+
+            if (!items.Any())
+            {
+                // Automatically add an item
+                var todoItem = new TodoItemDTO
+                {
+                    Name = "Initial Item"
+                };
+
+                await CreateTodoItem(todoItem);
+
+                items = await _context.TodoItems
+                .Select(x => ItemToDTO(x))
+                .ToListAsync();
+            }
+
+            return items;
         }
 
         [HttpGet("{id}")]

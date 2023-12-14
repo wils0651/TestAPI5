@@ -16,8 +16,6 @@ namespace TestAPI5.Controllers
         public TodoItemsController(TodoContext context)
         {
             _context = context;
-
-
         }
 
         // GET: api/TodoItems

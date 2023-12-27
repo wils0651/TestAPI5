@@ -21,7 +21,7 @@ namespace TestAPI5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(); // Added
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -40,6 +40,11 @@ namespace TestAPI5
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1"));
             }
+
+            app.UseCors(
+                //options => options.WithOrigins("http://localhost:5173/").AllowAnyMethod()
+                options => options.AllowAnyOrigin()
+                );
 
             app.UseHttpsRedirection();
 

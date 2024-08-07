@@ -46,7 +46,7 @@ namespace TestAPI5
                 options => options.AllowAnyOrigin()
                 );
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -18,6 +18,7 @@ namespace TestAPI5.Controllers
         public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/TodoItems

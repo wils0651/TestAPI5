@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,8 +13,9 @@ namespace TestAPI5.Controllers
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
+        private readonly ILogger<TodoItemsController> _logger;
 
-        public TodoItemsController(TodoContext context)
+        public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger)
         {
             _context = context;
         }
@@ -22,12 +24,16 @@ namespace TestAPI5.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
         {
+            _logger.LogDebug($"Call to {nameof(GetTodoItems)}");
+
             var items = await _context.TodoItems
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
 
             if (!items.Any())
             {
+                _logger.LogDebug("creating initial item");
+
                 // Automatically add an item
                 var todoItem = new TodoItemDTO
                 {
@@ -89,6 +95,8 @@ namespace TestAPI5.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItemDTO>> CreateTodoItem(TodoItemDTO todoItemDTO)
         {
+            _logger.LogDebug("Creating an item");
+
             var todoItem = new TodoItem
             {
                 IsComplete = todoItemDTO.IsComplete,

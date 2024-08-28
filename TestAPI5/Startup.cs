@@ -29,11 +29,15 @@ namespace TestAPI5
             });
             services.AddDbContext<TodoContext>(opt =>
                                                opt.UseInMemoryDatabase("TestAPI5"));
+
+            services.AddLogging();
+            //services.AddHttpLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -43,14 +47,14 @@ namespace TestAPI5
 
             app.UseCors(
                 //options => options.WithOrigins("http://localhost:5173/").AllowAnyMethod()
-                options => options.AllowAnyOrigin()
+                options => options.AllowAnyOrigin().AllowAnyMethod()
                 );
 
             //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

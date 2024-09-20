@@ -16,17 +16,29 @@ namespace TestAPI5
             Configuration = configuration;
         }
 
+        private const string AllowAllOrigins = "AllowAllOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(); // Added
+            services.AddCors(options =>
+            {
+                options.AddPolicy(AllowAllOrigins,
+                    builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            }); // Added
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestAPI5", Version = "v1" });
             });
+
             services.AddDbContext<TodoContext>(opt =>
                                                opt.UseInMemoryDatabase("TestAPI5"));
 
@@ -45,10 +57,7 @@ namespace TestAPI5
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1"));
             }
 
-            app.UseCors(
-                //options => options.WithOrigins("http://localhost:5173/").AllowAnyMethod()
-                options => options.AllowAnyOrigin()
-                );
+            app.UseCors(AllowAllOrigins);
 
             //app.UseHttpsRedirection();
 

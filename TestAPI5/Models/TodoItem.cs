@@ -1,10 +1,17 @@
-﻿namespace TestAPI5.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace TestAPI5.Models
 {
     public class TodoItem
     {
-        public long Id { get; set; }
+        public Int64 Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
         public bool IsComplete { get; set; }
-        public string Secret { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Configuration;
+using System;
 using TestAPI5.Models;
 
 namespace TestAPI5
@@ -39,8 +41,15 @@ namespace TestAPI5
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestAPI5", Version = "v1" });
             });
 
-            services.AddDbContext<TodoContext>(opt =>
-                                               opt.UseInMemoryDatabase("TestAPI5"));
+            // In Memory DB
+            //services.AddDbContext<TodoContext>(opt =>
+            //                                   opt.UseInMemoryDatabase("TestAPI5"));
+
+            // Database connection with PostgreSQL
+            services.AddDbContext<TodoContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+
 
             services.AddLogging();
             //services.AddHttpLogging();

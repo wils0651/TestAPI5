@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace TestAPI5.Controllers
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
 
-            if (!items.Any())
+            if (items.Count < 1)
             {
                 _logger.LogDebug("creating initial item");
 
@@ -101,7 +102,8 @@ namespace TestAPI5.Controllers
             var todoItem = new TodoItem
             {
                 IsComplete = todoItemDTO.IsComplete,
-                Name = todoItemDTO.Name
+                Name = todoItemDTO.Name,
+                CreatedDate = DateTime.Now
             };
 
             _context.TodoItems.Add(todoItem);

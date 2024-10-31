@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestAPI5.Models
 {
+    [Table("todoitem")]
     public class TodoItem
     {
         public Int64 Id { get; set; }

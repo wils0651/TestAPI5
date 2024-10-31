@@ -11,7 +11,7 @@ namespace TestAPI5.Controllers
         [HttpGet]
         public ActionResult<string> GetStatus()
         {
-            var time = DateTime.Now.ToShortDateString();
+            var time = DateTime.Now.ToString();
             return $"Success. {time}";
         }
     }

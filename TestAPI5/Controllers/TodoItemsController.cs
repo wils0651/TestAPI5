@@ -28,7 +28,7 @@ namespace TestAPI5.Controllers
         {
             _logger.LogDebug($"Call to {nameof(GetTodoItems)}");
 
-            var items = await _context.TodoItems
+            var items = await _context.TodoItem
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
 
@@ -44,7 +44,7 @@ namespace TestAPI5.Controllers
 
                 await CreateTodoItem(todoItem);
 
-                items = await _context.TodoItems
+                items = await _context.TodoItem
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
             }
@@ -55,7 +55,7 @@ namespace TestAPI5.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.TodoItem.FindAsync(id);
 
             if (todoItem == null)
             {
@@ -73,7 +73,7 @@ namespace TestAPI5.Controllers
                 return BadRequest();
             }
 
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.TodoItem.FindAsync(id);
             if (todoItem == null)
             {
                 return NotFound();
@@ -106,7 +106,7 @@ namespace TestAPI5.Controllers
                 CreatedDate = DateTime.Now
             };
 
-            _context.TodoItems.Add(todoItem);
+            _context.TodoItem.Add(todoItem);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
@@ -118,21 +118,21 @@ namespace TestAPI5.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.TodoItem.FindAsync(id);
 
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todoItem);
+            _context.TodoItem.Remove(todoItem);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool TodoItemExists(long id) =>
-             _context.TodoItems.Any(e => e.Id == id);
+             _context.TodoItem.Any(e => e.Id == id);
 
         private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
             new TodoItemDTO

@@ -6,6 +6,6 @@ namespace TestAPI5.Models
     {
         public TodoContext(DbContextOptions<TodoContext> options) : base(options) { }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<TodoItem> TodoItem { get; set; }
     }
 }

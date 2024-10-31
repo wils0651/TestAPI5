@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace TestAPI5.Controllers
 {
@@ -10,7 +11,8 @@ namespace TestAPI5.Controllers
         [HttpGet]
         public ActionResult<string> GetStatus()
         {
-            return "true";
+            var time = DateTime.Now.ToShortDateString();
+            return $"Success. {time}";
         }
     }
 }

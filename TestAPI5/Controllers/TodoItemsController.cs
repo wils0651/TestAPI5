@@ -103,7 +103,7 @@ namespace TestAPI5.Controllers
             {
                 IsComplete = todoItemDTO.IsComplete,
                 Name = todoItemDTO.Name,
-                CreatedDate = DateTime.Now
+                CreatedDate = DateTime.Now.ToUniversalTime(),
             };
 
             _context.TodoItem.Add(todoItem);

@@ -66,7 +66,6 @@ namespace TestAPI5
                 app.UseSwaggerUI(c =>
                 { 
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1");
-                    c.RoutePrefix = "api/docs";
                 });
             }
 

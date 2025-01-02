@@ -62,12 +62,13 @@ namespace TestAPI5
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+            }
+
+            app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 { 
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1");
                 });
-            }
 
             app.UseCors(AllowAllOrigins);
 

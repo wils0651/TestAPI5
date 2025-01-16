@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using System.Configuration;
 using System;
 using TestAPI5.Models;
+using TestAPI5.Contracts;
+using TestAPI5.Services;
 
 namespace TestAPI5
 {
@@ -49,10 +51,9 @@ namespace TestAPI5
             services.AddDbContext<TodoContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-
-
             services.AddLogging();
-            //services.AddHttpLogging();
+
+            services.AddScoped<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

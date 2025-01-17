@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestAPI5.Models;
+using TestAPI5.ExternalTypes;
 
 namespace TestAPI5.Contracts
 {
     public interface IMessageService
     {
-        Task<List<Message>> GetMessagesAsync();
+        Task<MessageReturn> GetByIdAsync(long messageId);
+        Task<List<MessageReturn>> GetMessagesAsync();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestAPI5.Models
+namespace TestAPI5.ExternalTypes
 {
     public class TodoItemDTO
     {

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TestAPI5.ExternalTypes;
 using TestAPI5.Models;
 
 namespace TestAPI5.Controllers

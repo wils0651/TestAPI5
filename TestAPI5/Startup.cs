@@ -5,10 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Configuration;
-using System;
-using TestAPI5.Models;
 using TestAPI5.Contracts;
+using TestAPI5.Models;
 using TestAPI5.Services;
 
 namespace TestAPI5
@@ -66,10 +64,10 @@ namespace TestAPI5
             }
 
             app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                { 
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1");
-                });
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestAPI5 v1");
+            });
 
             app.UseCors(AllowAllOrigins);
 

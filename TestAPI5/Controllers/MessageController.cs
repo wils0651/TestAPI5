@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestAPI5.Contracts;
-using TestAPI5.Models;
+using TestAPI5.ExternalTypes;
 
 namespace TestAPI5.Controllers
 {
@@ -22,11 +22,19 @@ namespace TestAPI5.Controllers
 
         // GET: api/Message
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessages()
+        public async Task<ActionResult<IEnumerable<MessageReturn>>> GetMessages()
         {
             var messages = await _messageService.GetMessagesAsync();
 
             return messages;
+        }
+
+        [HttpGet("{messageId}")]
+        public async Task<ActionResult<MessageReturn>> GetMessage(long messageId)
+        {
+            var message = await _messageService.GetByIdAsync(messageId);
+
+            return message;
         }
     }
 }

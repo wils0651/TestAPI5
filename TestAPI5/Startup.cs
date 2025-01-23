@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TestAPI5.Contracts;
 using TestAPI5.Models;
+using TestAPI5.Repositories;
 using TestAPI5.Services;
 
 namespace TestAPI5
@@ -46,12 +47,14 @@ namespace TestAPI5
             //                                   opt.UseInMemoryDatabase("TestAPI5"));
 
             // Database connection with PostgreSQL
-            services.AddDbContext<TodoContext>(options =>
+            services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddLogging();
 
             services.AddScoped<IMessageService, MessageService>();
+
+            services.AddScoped<IMessageRepository, MessageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

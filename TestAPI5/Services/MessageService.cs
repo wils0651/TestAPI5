@@ -10,32 +10,26 @@ namespace TestAPI5.Services
 {
     public class MessageService : IMessageService
     {
-        private readonly TodoContext _context;
+        private readonly IMessageRepository _messageRepository;
 
-        public MessageService(TodoContext context)
+        public MessageService(IMessageRepository messageRepository)
         {
-            _context = context;
+            this._messageRepository = messageRepository;
         }
 
         public async Task<List<MessageReturn>> GetMessagesAsync()
         {
-            var messages = await _context.Message
-                .Include(m => m.Computer)
-                .Include(m => m.ComputerTask)
-                .OrderByDescending(m => m.CreatedDate)
-                .ToListAsync();
+            var messages = await _messageRepository.GetMessagesAsync();
 
             return messages
                 .Select(MapToReturn)
+                .OrderByDescending(m => m.CreatedDate)
                 .ToList();
         }
 
         public async Task<MessageReturn> GetByIdAsync(long messageId)
         {
-            var message = await _context.Message
-                .Include(m => m.Computer)
-                .Include(m => m.ComputerTask)
-                .FirstOrDefaultAsync(m => m.MessageId == messageId);
+            var message = await _messageRepository.GetByIdAsync(messageId);
 
             return MapToReturn(message);
         }

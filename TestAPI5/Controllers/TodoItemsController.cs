@@ -14,10 +14,10 @@ namespace TestAPI5.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly DatabaseContext _context;
         private readonly ILogger<TodoItemsController> _logger;
 
-        public TodoItemsController(TodoContext context, ILogger<TodoItemsController> logger)
+        public TodoItemsController(DatabaseContext context, ILogger<TodoItemsController> logger)
         {
             _context = context;
             _logger = logger;

@@ -8,5 +8,7 @@ namespace TestAPI5.Contracts
     {
         Task<MessageReturn> GetByIdAsync(long messageId);
         Task<List<MessageReturn>> GetMessagesAsync();
+
+        public Task<List<ComputerInfoReturn>> ListComputerInfoReturnsAsync();
     }
 }

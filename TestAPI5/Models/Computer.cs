@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestAPI5.Models
 {
+    [Table("computer")]
     public class Computer
     {
         [Key]

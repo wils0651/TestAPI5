@@ -50,7 +50,8 @@ namespace TestAPI5.Services
                     ComputerId = computer.ComputerId,
                     ComputerName = computer.Name,
                     ComputerTaskName = lastMessage.ComputerTask.Name,
-                    MessageDate = lastMessage.CreatedDate
+                    MessageDate = lastMessage.CreatedDate,
+                    IpAddress = lastMessage.Computer.IpAddress
                 };
 
                 computerInfos.Add(computerInfo);
@@ -70,7 +71,7 @@ namespace TestAPI5.Services
                 ComputerTaskId = message.ComputerTaskId,
                 ComputerTaskName = message.ComputerTask.Name,
                 ComputerTaskDescription = message.ComputerTask.Description,
-                CreatedDate = message.CreatedDate.ToLocalTime(),
+                CreatedDate = message.CreatedDate,
                 Note = message.Note
             };
         }

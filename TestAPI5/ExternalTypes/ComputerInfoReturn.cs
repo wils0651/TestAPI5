@@ -11,5 +11,7 @@ namespace TestAPI5.ExternalTypes
         public string ComputerTaskName { get; set; }
 
         public DateTime MessageDate { get; set; }
+
+        public string IpAddress { get; set; }
     }
 }

@@ -20,6 +20,6 @@ namespace TestAPI5.Models
 
         [MaxLength(128)]
         [Column("ipaddress")]
-        public string? IpAddress { get; set; }
+        public string IpAddress { get; set; }
     }
 }

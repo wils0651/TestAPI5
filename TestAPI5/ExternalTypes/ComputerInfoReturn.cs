@@ -8,6 +8,8 @@ namespace TestAPI5.ExternalTypes
 
         public string ComputerName { get; set; }
 
+        public string ComputerDescription { get; set; }
+
         public string ComputerTaskName { get; set; }
 
         public DateTime MessageDate { get; set; }

@@ -14,8 +14,8 @@ namespace TestAPI5.Services
 
         public MessageService(IMessageRepository messageRepository, IComputerRepository computerRepository)
         {
-            this._messageRepository = messageRepository;
-            this._computerRepository = computerRepository;
+            _messageRepository = messageRepository;
+            _computerRepository = computerRepository;
         }
 
         public async Task<List<MessageReturn>> GetMessagesAsync()
@@ -49,6 +49,7 @@ namespace TestAPI5.Services
                 {
                     ComputerId = computer.ComputerId,
                     ComputerName = computer.Name,
+                    ComputerDescription = computer.Description,
                     ComputerTaskName = lastMessage.ComputerTask.Name,
                     MessageDate = lastMessage.CreatedDate,
                     IpAddress = lastMessage.Computer.IpAddress

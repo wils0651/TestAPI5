@@ -42,10 +42,6 @@ namespace TestAPI5
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestAPI5", Version = "v1" });
             });
 
-            // In Memory DB
-            //services.AddDbContext<TodoContext>(opt =>
-            //                                   opt.UseInMemoryDatabase("TestAPI5"));
-
             // Database connection with PostgreSQL
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -53,9 +49,11 @@ namespace TestAPI5
             services.AddLogging();
 
             services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<IUnclassifiedMessageService, UnclassifiedMessageService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();
+            services.AddScoped<IUnclassifiedMessageRepository, UnclassifiedMessageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

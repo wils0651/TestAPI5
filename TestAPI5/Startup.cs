@@ -50,10 +50,12 @@ namespace TestAPI5
 
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IUnclassifiedMessageService, UnclassifiedMessageService>();
+            services.AddScoped<IComputerTaskService, ComputerTaskService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();
             services.AddScoped<IUnclassifiedMessageRepository, UnclassifiedMessageRepository>();
+            services.AddScoped<IComputerTaskRepository, ComputerTaskRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

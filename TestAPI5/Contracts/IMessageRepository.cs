@@ -11,5 +11,6 @@ namespace TestAPI5.Contracts
         public Task<Message> GetByIdAsync(long messageId);
 
         public Task<Message> LastMessageByComputerIdAsync(int computerId);
+        Task<List<Message>> ListMessageByComputerIdAsync(int computerId, int page = 1, int pageSize = 5);
     }
 }

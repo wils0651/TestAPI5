@@ -14,7 +14,7 @@ namespace TestAPI5.Controllers
 
         public UnclassifiedMessageController(IUnclassifiedMessageService unclassifiedMessageService)
         {
-            this._unclassifiedMessageService = unclassifiedMessageService;
+            _unclassifiedMessageService = unclassifiedMessageService;
         }
 
         [HttpGet]

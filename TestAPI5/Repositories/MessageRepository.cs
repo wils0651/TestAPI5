@@ -40,5 +40,16 @@ namespace TestAPI5.Repositories
                 .OrderByDescending(m => m.CreatedDate)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Message>> ListMessageByComputerIdAsync(int computerId, int page = 1, int pageSize = 5)
+        {
+            return await _context.Message
+                .Include(m => m.ComputerTask)
+                .Where(m => m.ComputerId == computerId)
+                .OrderByDescending(m => m.CreatedDate)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }

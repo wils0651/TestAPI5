@@ -6,6 +6,7 @@ namespace TestAPI5.Contracts
 {
     public interface IComputerRepository
     {
+        Task<Computer> GetComputerByIdAsync(int computerId);
         public Task<List<Computer>> ListComputersAsync();
     }
 }

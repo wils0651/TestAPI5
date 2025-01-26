@@ -51,6 +51,7 @@ namespace TestAPI5
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IUnclassifiedMessageService, UnclassifiedMessageService>();
             services.AddScoped<IComputerTaskService, ComputerTaskService>();
+            services.AddScoped<IComputerService, ComputerService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();

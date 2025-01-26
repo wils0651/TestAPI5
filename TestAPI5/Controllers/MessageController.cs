@@ -37,12 +37,5 @@ namespace TestAPI5.Controllers
             return message;
         }
 
-        [HttpGet("ComputerInfo/List")]
-        public async Task<ActionResult<IEnumerable<ComputerInfoReturn>>> ListComputerInfo()
-        {
-            var computerInfos = await _messageService.ListComputerInfoReturnsAsync();
-
-            return computerInfos;
-        }
     }
 }

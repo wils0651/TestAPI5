@@ -22,5 +22,11 @@ namespace TestAPI5.Repositories
                 .OrderBy(c => c.ComputerId)
                 .ToListAsync();
         }
+
+        public async Task<Computer> GetComputerByIdAsync(int computerId)
+        {
+            return await _context.Computer
+                .FirstOrDefaultAsync(c => c.ComputerId == computerId);
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace TestAPI5.Models
         public DbSet<ComputerTask> ComputerTask { get; set; }
         public DbSet<Message> Message { get; set; }
         public DbSet<UnclassifiedMessage> UnclassifiedMessage { get; set; }
+        public DbSet<Probe> Probe { get; set; }
+        public DbSet<ProbeData> ProbeData { get; set; }
     }
 }

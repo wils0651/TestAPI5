@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestAPI5.Contracts;
@@ -11,12 +10,10 @@ namespace TestAPI5.Controllers
     [ApiController]
     public class MessageController : ControllerBase
     {
-        private readonly ILogger<MessageController> _logger;
         private readonly IMessageService _messageService;
 
-        public MessageController(ILogger<MessageController> logger, IMessageService messageService)
+        public MessageController(IMessageService messageService)
         {
-            _logger = logger;
             _messageService = messageService;
         }
 
@@ -36,6 +33,5 @@ namespace TestAPI5.Controllers
 
             return message;
         }
-
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestAPI5.Contracts;
 using TestAPI5.ExternalTypes;
+using TestAPI5.Models;
 
 namespace TestAPI5.Services
 {
@@ -57,13 +58,32 @@ namespace TestAPI5.Services
                 })
                 .ToList();
 
-            return new ComputerDetailReturn()
+            return new ComputerDetailReturn
             {
                 ComputerId = computer.ComputerId,
                 ComputerName = computer.Name,
                 ComputerDescription = computer.Description,
                 IpAddress = computer.IpAddress,
                 ComputerTasks = computerTaskReturns
+            };
+        }
+
+        public async Task<ComputerDetailReturn> CreateComputerAsync(CreateComputerRequest request)
+        {
+            var computer = new Computer
+            {
+                Name = request.Name,
+                Description = request.Description,
+            };
+            
+            _computerRepository.Add(computer);
+            await _computerRepository.SaveChangesAsync();
+
+            return new ComputerDetailReturn()
+            {
+                ComputerId = computer.ComputerId,
+                ComputerName = computer.Name,
+                ComputerDescription = computer.Description,
             };
         }
     }

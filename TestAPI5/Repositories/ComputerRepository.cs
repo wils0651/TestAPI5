@@ -28,5 +28,16 @@ namespace TestAPI5.Repositories
             return await _context.Computer
                 .FirstOrDefaultAsync(c => c.ComputerId == computerId);
         }
+
+        public void Add(Computer computer)
+        {
+            _context.Computer.Add(computer);
+            return;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

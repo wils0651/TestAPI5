@@ -8,5 +8,7 @@ namespace TestAPI5.Contracts
     {
         Task<Computer> GetComputerByIdAsync(int computerId);
         public Task<List<Computer>> ListComputersAsync();
+        void Add(Computer computer);
+        Task SaveChangesAsync();
     }
 }

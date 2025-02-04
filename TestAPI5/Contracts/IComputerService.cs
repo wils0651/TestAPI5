@@ -8,5 +8,6 @@ namespace TestAPI5.Contracts
     {
         Task<ComputerDetailReturn> GetComputerDetailAsync(int computerId);
         Task<List<ComputerInfoReturn>> ListComputerInfoReturnsAsync();
+        Task<ComputerDetailReturn> CreateComputerAsync(CreateComputerRequest request);
     }
 }

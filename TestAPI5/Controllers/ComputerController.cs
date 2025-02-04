@@ -31,5 +31,12 @@ namespace TestAPI5.Controllers
             var computerDetail = await _computerService.GetComputerDetailAsync(computerId);
             return computerDetail;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ComputerDetailReturn>> CreateComputer(CreateComputerRequest request)
+        {
+            var computerDetail = await _computerService.CreateComputerAsync(request);
+            return computerDetail;
+        }
     }
 }

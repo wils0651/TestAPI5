@@ -9,5 +9,6 @@ namespace TestAPI5.Contracts
     {
         Task<List<ProbeDataReturn>> ListAsync(DateTime? startDate);
         Task<List<ProbeDataReturn>> ListByProbeIdAsync(int probeId, DateTime? startDate);
+        Task<ProbeDataReturn> GetLatestByProbeIdAsync(int probeId);
     }
 }

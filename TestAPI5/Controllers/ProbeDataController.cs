@@ -33,5 +33,13 @@ namespace TestAPI5.Controllers
             
             return probeDate;
         }
+
+        [HttpGet("Latest/{probeId}")]
+        public async Task<ActionResult<ProbeDataReturn>> GetLatestProbeData(int probeId)
+        {
+            var probeData = await _probeDataService.GetLatestByProbeIdAsync(probeId);
+
+            return probeData;
+        }
     }
 }

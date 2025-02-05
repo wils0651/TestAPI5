@@ -32,5 +32,14 @@ namespace TestAPI5.Repositories
                 .Where(pd => pd.CreatedDate >= startDate)
                 .ToListAsync();
         }
+
+        public async Task<ProbeData> GetLatestByProbeIdAsync(int probeId)
+        {
+            return await _context.ProbeData
+                .Include(pd => pd.Probe)
+                .Where(pd => pd.ProbeId == probeId)
+                .OrderByDescending(pd => pd.CreatedDate)
+                .FirstOrDefaultAsync();
+        }
     }
 }

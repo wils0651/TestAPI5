@@ -10,6 +10,8 @@ namespace TestAPI5.ExternalTypes
 
         public string ProbeName { get; set; }
 
+        public string ProbeDescription { get; set; }
+
         public decimal Temperature { get; set; }
 
         public DateTime CreatedDate { get; set; }

@@ -54,6 +54,7 @@ namespace TestAPI5.Services
                 ProbeDataId = probeData.ProbeDataId,
                 ProbeId = probeData.ProbeId,
                 ProbeName = probeData.Probe.ProbeName,
+                ProbeDescription = probeData.Probe.Description,
                 Temperature = probeData.Temperature,
                 CreatedDate = probeData.CreatedDate,
             };

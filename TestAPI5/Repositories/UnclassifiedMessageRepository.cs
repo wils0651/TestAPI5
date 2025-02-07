@@ -26,7 +26,7 @@ namespace TestAPI5.Repositories
         public async Task<List<UnclassifiedMessage>> ListLatestAsync(int numberOfDays)
         {
             return await _context.UnclassifiedMessage
-                .Where(u => u.CreatedDate >= System.DateTime.Now.AddDays(-numberOfDays))
+                .Where(u => u.CreatedDate >= System.DateTime.Now.AddDays(-numberOfDays).ToUniversalTime())
                 .OrderByDescending(u => u.CreatedDate)
                 .ToListAsync();
         }

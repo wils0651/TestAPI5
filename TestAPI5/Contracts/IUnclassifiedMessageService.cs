@@ -7,5 +7,7 @@ namespace TestAPI5.Contracts
     public interface IUnclassifiedMessageService
     {
         Task<List<UnclassifiedMessageReturn>> ListAsync();
+
+        Task<List<UnclassifiedMessageReturn>> ListLatestAsync(int numberOfDays);
     }
 }

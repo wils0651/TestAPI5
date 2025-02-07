@@ -22,5 +22,13 @@ namespace TestAPI5.Repositories
                 .OrderByDescending(u => u.CreatedDate)
                 .ToListAsync();
         }
+
+        public async Task<List<UnclassifiedMessage>> ListLatestAsync(int numberOfDays)
+        {
+            return await _context.UnclassifiedMessage
+                .Where(u => u.CreatedDate >= System.DateTime.Now.AddDays(-numberOfDays))
+                .OrderByDescending(u => u.CreatedDate)
+                .ToListAsync();
+        }
     }
 }

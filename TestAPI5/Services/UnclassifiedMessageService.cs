@@ -26,6 +26,16 @@ namespace TestAPI5.Services
                 .ToList();
         }
 
+        public async Task<List<UnclassifiedMessageReturn>> ListLatestAsync(int numberOfDays)
+        {
+            var unclassifiedMessages = await _unclassifiedMessageRepository.ListLatestAsync(numberOfDays);
+
+            return unclassifiedMessages
+                .Select(MapToReturn)
+                .OrderByDescending(r => r.CreatedDate)
+                .ToList();
+        }
+
         private UnclassifiedMessageReturn MapToReturn(UnclassifiedMessage unclassifiedMessage)
         {
             return new UnclassifiedMessageReturn

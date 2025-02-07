@@ -46,7 +46,7 @@ namespace TestAPI5.Services
         public async Task<ComputerDetailReturn> GetComputerDetailAsync(int computerId)
         {
             var computer = await _computerRepository.GetComputerByIdAsync(computerId);
-            var messages = await _messageRepository.ListMessageByComputerIdAsync(computerId, page: 1, pageSize: 5);
+            var messages = await _messageRepository.ListMessageByComputerIdAsync(computerId, page: 1, pageSize: 10);
 
             var computerTaskReturns = messages
                 .Select(m => new ComputerTaskReturn

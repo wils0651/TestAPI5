@@ -24,5 +24,13 @@ namespace TestAPI5.Controllers
 
             return unclassifiedMessages;
         }
+
+        [HttpGet("Latest/{numberOfDays}")]
+        public async Task<ActionResult<IEnumerable<UnclassifiedMessageReturn>>> GetLatestMessages(int numberOfDays)
+        {
+            var unclassifiedMessages = await _unclassifiedMessageService.ListLatestAsync(numberOfDays);
+
+            return unclassifiedMessages;
+        }
     }
 }

@@ -37,6 +37,11 @@ namespace TestAPI5.Services
 
         private static MessageReturn MapToReturn(Message message)
         {
+            if (message == null)
+            {
+                return null;
+            }
+
             return new MessageReturn
             {
                 MessageId = message.MessageId,

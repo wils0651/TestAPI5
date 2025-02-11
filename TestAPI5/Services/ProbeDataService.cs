@@ -49,6 +49,11 @@ namespace TestAPI5.Services
 
         private static ProbeDataReturn MapToReturn(ProbeData probeData)
         {
+            if (probeData == null)
+            {
+                return null;
+            }
+
             return new ProbeDataReturn
             {
                 ProbeDataId = probeData.ProbeDataId,

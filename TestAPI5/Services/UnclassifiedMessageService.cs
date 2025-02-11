@@ -38,6 +38,11 @@ namespace TestAPI5.Services
 
         private UnclassifiedMessageReturn MapToReturn(UnclassifiedMessage unclassifiedMessage)
         {
+            if (unclassifiedMessage == null)
+            {
+                return null;
+            }
+
             return new UnclassifiedMessageReturn
             {
                 UnclassifiedMessageId = unclassifiedMessage.UnclassifiedMessageId,

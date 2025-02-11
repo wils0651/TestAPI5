@@ -26,6 +26,11 @@ namespace TestAPI5.Services
 
         private ComputerTaskReturn MapToReturn(ComputerTask computerTask)
         {
+            if (computerTask == null)
+            {
+                return null;
+            }
+
             return new ComputerTaskReturn
             {
                 ComputerTaskId = computerTask.ComputerTaskId,

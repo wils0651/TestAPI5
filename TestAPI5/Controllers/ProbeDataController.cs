@@ -30,7 +30,7 @@ namespace TestAPI5.Controllers
         public async Task<ActionResult<IEnumerable<ProbeDataReturn>>> GetProbeData(int probeId, DateTime? startDate)
         {
             var probeDate = await _probeDataService.ListByProbeIdAsync(probeId, startDate);
-            
+
             return probeDate;
         }
 

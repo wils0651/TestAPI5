@@ -23,7 +23,7 @@ namespace TestAPI5.Repositories
                 .Where(pd => pd.CreatedDate >= startDate)
                 .ToListAsync();
         }
-        
+
         public async Task<List<ProbeData>> ListByProbeIdAsync(int probeId, DateTime startDate)
         {
             return await _context.ProbeData

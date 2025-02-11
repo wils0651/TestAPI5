@@ -33,7 +33,7 @@ namespace TestAPI5
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod());
-            }); // Added
+            });
 
             services.AddControllers();
 
@@ -53,12 +53,14 @@ namespace TestAPI5
             services.AddScoped<IComputerTaskService, ComputerTaskService>();
             services.AddScoped<IComputerService, ComputerService>();
             services.AddScoped<IProbeDataService, ProbeDataService>();
+            services.AddScoped<IProbeService, ProbeService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();
             services.AddScoped<IUnclassifiedMessageRepository, UnclassifiedMessageRepository>();
             services.AddScoped<IComputerTaskRepository, ComputerTaskRepository>();
             services.AddScoped<IProbeDataRepository, ProbeDataRepository>();
+            services.AddScoped<IProbeRepository, ProbeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -46,6 +46,12 @@ namespace TestAPI5.Services
         public async Task<ComputerDetailReturn> GetComputerDetailAsync(int computerId)
         {
             var computer = await _computerRepository.GetComputerByIdAsync(computerId);
+
+            if (computer == null)
+            {
+                return null;
+            }
+
             var messages = await _messageRepository.ListMessageByComputerIdAsync(computerId, page: 1, pageSize: 10);
 
             var computerTaskReturns = messages
@@ -75,7 +81,7 @@ namespace TestAPI5.Services
                 Name = request.Name,
                 Description = request.Description,
             };
-            
+
             _computerRepository.Add(computer);
             await _computerRepository.SaveChangesAsync();
 

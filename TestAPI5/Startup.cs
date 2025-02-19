@@ -54,6 +54,7 @@ namespace TestAPI5
             services.AddScoped<IComputerService, ComputerService>();
             services.AddScoped<IProbeDataService, ProbeDataService>();
             services.AddScoped<IProbeService, ProbeService>();
+            services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();
@@ -61,6 +62,7 @@ namespace TestAPI5
             services.AddScoped<IComputerTaskRepository, ComputerTaskRepository>();
             services.AddScoped<IProbeDataRepository, ProbeDataRepository>();
             services.AddScoped<IProbeRepository, ProbeRepository>();
+            services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

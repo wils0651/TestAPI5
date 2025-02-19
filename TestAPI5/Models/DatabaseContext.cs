@@ -14,5 +14,6 @@ namespace TestAPI5.Models
         public DbSet<UnclassifiedMessage> UnclassifiedMessage { get; set; }
         public DbSet<Probe> Probe { get; set; }
         public DbSet<ProbeData> ProbeData { get; set; }
+        public DbSet<TemperatureStatistic> TemperatureStatistic { get; set; }
     }
 }

@@ -48,6 +48,7 @@ namespace TestAPI5
 
             services.AddLogging();
 
+            // Services
             services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<IUnclassifiedMessageService, UnclassifiedMessageService>();
             services.AddScoped<IComputerTaskService, ComputerTaskService>();
@@ -55,7 +56,9 @@ namespace TestAPI5
             services.AddScoped<IProbeDataService, ProbeDataService>();
             services.AddScoped<IProbeService, ProbeService>();
             services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
+            services.AddScoped<IGarageDistanceService, GarageDistanceService>();
 
+            // Repositories
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IComputerRepository, ComputerRepository>();
             services.AddScoped<IUnclassifiedMessageRepository, UnclassifiedMessageRepository>();
@@ -63,6 +66,7 @@ namespace TestAPI5
             services.AddScoped<IProbeDataRepository, ProbeDataRepository>();
             services.AddScoped<IProbeRepository, ProbeRepository>();
             services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
+            services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

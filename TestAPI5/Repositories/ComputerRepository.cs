@@ -20,6 +20,7 @@ namespace TestAPI5.Repositories
         {
             return await _context.Computer
                 .OrderBy(c => c.ComputerId)
+                .Where(c => c.IsActive)
                 .ToListAsync();
         }
 

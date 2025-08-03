@@ -21,5 +21,8 @@ namespace TestAPI5.Models
         [MaxLength(128)]
         [Column("ipaddress")]
         public string IpAddress { get; set; }
+
+        [Column("isactive")]
+        public bool IsActive { get; set; }
     }
 }

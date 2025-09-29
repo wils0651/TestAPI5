@@ -38,7 +38,9 @@ namespace TestAPI5.Services
                 GarageDistanceId = garageDistance.GarageDistanceId,
                 CreatedDate = garageDistance.CreatedDate,
                 Distance = garageDistance.Distance,
-                GarageStatusName = garageDistance.GarageStatus.GarageStatusName
+                GarageStatusName = garageDistance.GarageStatus == null
+                    ? "Unknown"
+                    : garageDistance.GarageStatus.GarageStatusName
             };
         }
     }

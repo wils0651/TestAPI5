@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using TestAPI5.Contracts;
 using TestAPI5.ExternalTypes;
 using TestAPI5.Models;
-using TestAPI5.Repositories;
 
 namespace TestAPI5.Services
 {
@@ -39,6 +38,7 @@ namespace TestAPI5.Services
                 GarageDistanceId = garageDistance.GarageDistanceId,
                 CreatedDate = garageDistance.CreatedDate,
                 Distance = garageDistance.Distance,
+                GarageStatusName = garageDistance.GarageStatus.GarageStatusName
             };
         }
     }

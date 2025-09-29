@@ -7,5 +7,6 @@ namespace TestAPI5.ExternalTypes
         public long GarageDistanceId { get; set; }
         public decimal Distance { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string GarageStatusName { get; set; }
     }
 }

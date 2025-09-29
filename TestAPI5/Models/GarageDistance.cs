@@ -16,5 +16,11 @@ namespace TestAPI5.Models
 
         [Column("createddate")]
         public DateTime CreatedDate { get; set; }
+
+        [Column("garagestatusid")]
+        public int? GarageStatusId { get; set; }
+
+        [ForeignKey("GarageStatusId")]
+        public GarageStatus GarageStatus { get; set; }
     }
 }

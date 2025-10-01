@@ -8,5 +8,6 @@ namespace TestAPI5.ExternalTypes
         public decimal Distance { get; set; }
         public DateTime CreatedDate { get; set; }
         public string GarageStatusName { get; set; }
+        public int? GarageStatusId { get; set; }
     }
 }

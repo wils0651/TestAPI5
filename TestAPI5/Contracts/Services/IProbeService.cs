@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using TestAPI5.ExternalTypes;
 
-namespace TestAPI5.Contracts
+namespace TestAPI5.Contracts.Services
 {
     public interface IProbeService
     {

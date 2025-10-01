@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestAPI5.Contracts;
+using TestAPI5.Contracts.Repositories;
 using TestAPI5.Models;
 
 namespace TestAPI5.Repositories

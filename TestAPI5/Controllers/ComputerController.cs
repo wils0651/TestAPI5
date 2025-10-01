@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestAPI5.Contracts;
+using TestAPI5.Contracts.Services;
 using TestAPI5.ExternalTypes;
 
 namespace TestAPI5.Controllers

@@ -16,5 +16,8 @@ namespace TestAPI5.Models
         public DbSet<ProbeData> ProbeData { get; set; }
         public DbSet<TemperatureStatistic> TemperatureStatistic { get; set; }
         public DbSet<GarageDistance> GarageDistance { get; set; }
+        public DbSet<GarageEventLog> GarageEventLog { get; set; }
+        public DbSet<GarageEventType> GarageEventType { get; set; }
+        public DbSet<GarageStatus> GarageStatus { get; set; }
     }
 }

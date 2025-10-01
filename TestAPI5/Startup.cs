@@ -57,6 +57,7 @@ namespace TestAPI5
             services.AddScoped<IProbeService, ProbeService>();
             services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
             services.AddScoped<IGarageDistanceService, GarageDistanceService>();
+            services.AddScoped<IGarageEventLogService, GarageEventLogService>();
 
             // Repositories
             services.AddScoped<IMessageRepository, MessageRepository>();
@@ -67,6 +68,7 @@ namespace TestAPI5
             services.AddScoped<IProbeRepository, ProbeRepository>();
             services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
             services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
+            services.AddScoped<IGarageEventLogRepository, GarageEventLogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

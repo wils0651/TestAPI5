@@ -55,7 +55,7 @@ namespace TestAPI5.Services
                 ComputerTaskDescription = message.ComputerTask.Description,
                 CreatedDate = message.CreatedDate,
                 Note = message.Note,
-                IsStale = DateTime.Now.Subtract(message.CreatedDate).TotalMinutes > 5
+                IsStale = DateTime.Now.Subtract(message.CreatedDate).TotalHours > 24
             };
         }
     }

@@ -15,5 +15,7 @@ namespace TestAPI5.ExternalTypes
         public DateTime MessageDate { get; set; }
 
         public string IpAddress { get; set; }
+        
+        public bool IsStale { get; set; }
     }
 }

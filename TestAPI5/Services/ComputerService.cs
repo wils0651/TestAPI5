@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestAPI5.Contracts.Repositories;
@@ -28,14 +29,15 @@ namespace TestAPI5.Services
             {
                 var lastMessage = await _messageRepository.LastMessageByComputerIdAsync(computer.ComputerId);
 
-                var computerInfo = new ComputerInfoReturn()
+                var computerInfo = new ComputerInfoReturn
                 {
                     ComputerId = computer.ComputerId,
                     ComputerName = computer.Name,
                     ComputerDescription = computer.Description,
                     ComputerTaskName = lastMessage.ComputerTask.Name,
                     MessageDate = lastMessage.CreatedDate,
-                    IpAddress = lastMessage.Computer.IpAddress
+                    IpAddress = lastMessage.Computer.IpAddress,
+                    IsStale = DateTime.Now.Subtract(lastMessage.CreatedDate).TotalHours > 24
                 };
 
                 computerInfos.Add(computerInfo);

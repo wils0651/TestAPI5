@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestAPI5.Contracts.Repositories;
@@ -43,6 +44,7 @@ namespace TestAPI5.Services
                     ? "Unknown"
                     : garageDistance.GarageStatus.GarageStatusName,
                 GarageStatusId = garageDistance.GarageStatusId,
+                IsStale = DateTime.Now.Subtract(garageDistance.CreatedDate).TotalMinutes > 15
             };
         }
     }

@@ -63,6 +63,7 @@ namespace TestAPI5.Services
                 ProbeDescription = probeData.Probe.Description,
                 Temperature = probeData.Temperature,
                 CreatedDate = probeData.CreatedDate,
+                IsStale = DateTime.Now.Subtract(probeData.CreatedDate).TotalMinutes > 5
             };
         }
     }

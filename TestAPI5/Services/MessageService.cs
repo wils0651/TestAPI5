@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestAPI5.Contracts.Repositories;
@@ -53,7 +54,8 @@ namespace TestAPI5.Services
                 ComputerTaskName = message.ComputerTask.Name,
                 ComputerTaskDescription = message.ComputerTask.Description,
                 CreatedDate = message.CreatedDate,
-                Note = message.Note
+                Note = message.Note,
+                IsStale = DateTime.Now.Subtract(message.CreatedDate).TotalMinutes > 5
             };
         }
     }

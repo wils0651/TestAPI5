@@ -15,5 +15,7 @@ namespace TestAPI5.ExternalTypes
         public decimal Temperature { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        
+        public bool IsStale { get; set; }
     }
 }

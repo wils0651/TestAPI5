@@ -9,5 +9,6 @@ namespace TestAPI5.ExternalTypes
         public DateTime CreatedDate { get; set; }
         public string GarageStatusName { get; set; }
         public int? GarageStatusId { get; set; }
+        public bool IsStale { get; set; }
     }
 }

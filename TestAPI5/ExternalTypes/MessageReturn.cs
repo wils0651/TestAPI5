@@ -21,7 +21,7 @@ namespace TestAPI5.ExternalTypes
         public DateTime CreatedDate { get; set; }
 
         public string Note { get; set; }
-        
+
         public bool IsStale { get; set; }
     }
 }

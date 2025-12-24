@@ -21,6 +21,8 @@ namespace TestAPI5
                     config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
                     var env = Environment.GetEnvironmentVariable("APP_ENV");
+                    Console.WriteLine($"Current APP_ENV: {env}");
+
                     if (!string.IsNullOrEmpty(env))
                     {
                         config.AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true);

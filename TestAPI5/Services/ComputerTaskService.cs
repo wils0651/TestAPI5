@@ -25,6 +25,20 @@ namespace TestAPI5.Services
                 .ToList();
         }
 
+        public async Task<ComputerTaskReturn> CreateAsync(CreateComputerTaskRequest request)
+        {
+            var computerTask = new ComputerTask
+            {
+                Name = request.Name,
+                Description = request.Description,
+            };
+
+            _computerTaskRepository.Add(computerTask);
+            await _computerTaskRepository.SaveChangesAsync();
+
+            return MapToReturn(computerTask);
+        }
+
         private ComputerTaskReturn MapToReturn(ComputerTask computerTask)
         {
             if (computerTask == null)

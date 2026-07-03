@@ -23,5 +23,12 @@ namespace TestAPI5.Controllers
             var computerTasks = await _computerTaskService.ListAsync();
             return computerTasks;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ComputerTaskReturn>> CreateTask(CreateComputerTaskRequest request)
+        {
+            var computerTask = await _computerTaskService.CreateAsync(request);
+            return computerTask;
+        }
     }
 }

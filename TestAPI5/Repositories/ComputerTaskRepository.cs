@@ -22,5 +22,15 @@ namespace TestAPI5.Repositories
                 .OrderBy(c => c.ComputerTaskId)
                 .ToListAsync();
         }
+
+        public void Add(ComputerTask computerTask)
+        {
+            _context.ComputerTask.Add(computerTask);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

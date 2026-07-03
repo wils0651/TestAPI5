@@ -7,5 +7,7 @@ namespace TestAPI5.Contracts.Repositories
     public interface IComputerTaskRepository
     {
         Task<List<ComputerTask>> ListAsync();
+        void Add(ComputerTask computerTask);
+        Task SaveChangesAsync();
     }
 }

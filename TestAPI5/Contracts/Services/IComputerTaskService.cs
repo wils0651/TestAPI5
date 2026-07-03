@@ -7,5 +7,6 @@ namespace TestAPI5.Contracts.Services
     public interface IComputerTaskService
     {
         Task<List<ComputerTaskReturn>> ListAsync();
+        Task<ComputerTaskReturn> CreateAsync(CreateComputerTaskRequest request);
     }
 }

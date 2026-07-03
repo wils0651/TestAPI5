@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,12 +17,23 @@ namespace TestAPI5.Repositories
             _context = context;
         }
 
-        public async Task<List<TemperatureStatistic>> ListAsync(int probeId)
+        public async Task<List<TemperatureStatistic>> ListAsync(int probeId, DateTime? startDate, DateTime? endDate)
         {
-            return await _context.TemperatureStatistic
+            var query = _context.TemperatureStatistic
                 .Include(ts => ts.Probe)
-                .Where(ts => ts.ProbeId == probeId)
-                .ToListAsync();
+                .Where(ts => ts.ProbeId == probeId);
+
+            if (startDate.HasValue)
+            {
+                query = query.Where(ts => ts.MeasurementDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(ts => ts.MeasurementDate <= endDate.Value);
+            }
+
+            return await query.ToListAsync();
         }
     }
 }

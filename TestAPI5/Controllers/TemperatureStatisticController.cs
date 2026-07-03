@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestAPI5.Contracts.Services;
@@ -18,9 +19,9 @@ namespace TestAPI5.Controllers
         }
 
         [HttpGet("List/{probeId}")]
-        public async Task<ActionResult<IEnumerable<TemperatureStatisticReturn>>> GetTemperatureStatistics(int probeId)
+        public async Task<ActionResult<IEnumerable<TemperatureStatisticReturn>>> GetTemperatureStatistics(int probeId, DateTime? startDate, DateTime? endDate)
         {
-            var temperatureStatisticReturns = await _temperatureStatisticService.ListAsync(probeId);
+            var temperatureStatisticReturns = await _temperatureStatisticService.ListAsync(probeId, startDate, endDate);
 
             return temperatureStatisticReturns;
         }

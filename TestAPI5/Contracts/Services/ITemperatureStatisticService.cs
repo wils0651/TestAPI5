@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestAPI5.ExternalTypes;
 
@@ -6,6 +7,6 @@ namespace TestAPI5.Contracts.Services
 {
     public interface ITemperatureStatisticService
     {
-        Task<List<TemperatureStatisticReturn>> ListAsync(int probeId);
+        Task<List<TemperatureStatisticReturn>> ListAsync(int probeId, DateTime? startDate, DateTime? endDate);
     }
 }

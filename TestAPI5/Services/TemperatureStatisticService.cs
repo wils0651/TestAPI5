@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestAPI5.Contracts.Repositories;
@@ -17,9 +18,10 @@ namespace TestAPI5.Services
             _temperatureStatisticRepository = temperatureStatisticRepository;
         }
 
-        public async Task<List<TemperatureStatisticReturn>> ListAsync(int probeId)
+        public async Task<List<TemperatureStatisticReturn>> ListAsync(int probeId, DateTime? startDate, DateTime? endDate)
         {
-            var temperatureStatistics = await _temperatureStatisticRepository.ListAsync(probeId);
+            var temperatureStatistics = await _temperatureStatisticRepository.ListAsync(
+                probeId, startDate?.ToUniversalTime(), endDate?.ToUniversalTime());
 
             return temperatureStatistics
                 .Select(MapToReturn)

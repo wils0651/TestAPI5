@@ -24,13 +24,19 @@ namespace TestAPI5.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<ProbeData>> ListByProbeIdAsync(int probeId, DateTime startDate)
+        public async Task<List<ProbeData>> ListByProbeIdAsync(int probeId, DateTime startDate, DateTime? endDate)
         {
-            return await _context.ProbeData
+            var query = _context.ProbeData
                 .Include(pd => pd.Probe)
                 .Where(pd => pd.ProbeId == probeId)
-                .Where(pd => pd.CreatedDate >= startDate)
-                .ToListAsync();
+                .Where(pd => pd.CreatedDate >= startDate);
+
+            if (endDate.HasValue)
+            {
+                query = query.Where(pd => pd.CreatedDate <= endDate.Value);
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<ProbeData> GetLatestByProbeIdAsync(int probeId)

@@ -8,7 +8,7 @@ namespace TestAPI5.Contracts.Repositories
     public interface IProbeDataRepository
     {
         Task<List<ProbeData>> ListProbeDataAsync(DateTime startDate);
-        Task<List<ProbeData>> ListByProbeIdAsync(int probeId, DateTime startDate);
+        Task<List<ProbeData>> ListByProbeIdAsync(int probeId, DateTime startDate, DateTime? endDate);
         Task<ProbeData> GetLatestByProbeIdAsync(int probeId);
     }
 }

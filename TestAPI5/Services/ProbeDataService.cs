@@ -29,12 +29,12 @@ namespace TestAPI5.Services
                 .ToList();
         }
 
-        public async Task<List<ProbeDataReturn>> ListByProbeIdAsync(int probeId, DateTime? startDate)
+        public async Task<List<ProbeDataReturn>> ListByProbeIdAsync(int probeId, DateTime? startDate, DateTime? endDate)
         {
             startDate ??= DateTime.Now.AddDays(-1);
 
             var probeDatas = await _probeDataRepository.ListByProbeIdAsync(
-                probeId, startDate.Value.ToUniversalTime());
+                probeId, startDate.Value.ToUniversalTime(), endDate?.ToUniversalTime());
 
             return probeDatas
                 .Select(MapToReturn)

@@ -27,9 +27,9 @@ namespace TestAPI5.Controllers
         }
 
         [HttpGet("List/{probeId}")]
-        public async Task<ActionResult<IEnumerable<ProbeDataReturn>>> GetProbeData(int probeId, DateTime? startDate)
+        public async Task<ActionResult<IEnumerable<ProbeDataReturn>>> GetProbeData(int probeId, DateTime? startDate, DateTime? endDate)
         {
-            var probeDate = await _probeDataService.ListByProbeIdAsync(probeId, startDate);
+            var probeDate = await _probeDataService.ListByProbeIdAsync(probeId, startDate, endDate);
 
             return probeDate;
         }

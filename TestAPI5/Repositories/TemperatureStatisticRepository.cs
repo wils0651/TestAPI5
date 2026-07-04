@@ -33,7 +33,7 @@ namespace TestAPI5.Repositories
                 query = query.Where(ts => ts.MeasurementDate <= endDate.Value);
             }
 
-            return await query.ToListAsync();
+            return await query.OrderBy(ts => ts.MeasurementDate).ToListAsync();
         }
     }
 }

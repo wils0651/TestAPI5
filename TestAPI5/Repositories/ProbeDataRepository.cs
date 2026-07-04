@@ -36,7 +36,7 @@ namespace TestAPI5.Repositories
                 query = query.Where(pd => pd.CreatedDate <= endDate.Value);
             }
 
-            return await query.ToListAsync();
+            return await query.OrderBy(pd => pd.CreatedDate).ToListAsync();
         }
 
         public async Task<ProbeData> GetLatestByProbeIdAsync(int probeId)

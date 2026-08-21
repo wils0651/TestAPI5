@@ -47,6 +47,11 @@ namespace TestAPI5
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            // snow_forecasts lives in a separate database (snow_predictor), populated by the
+            // SnowPredictor solution's forecast job — hence the second DbContext/connection string.
+            services.AddDbContext<SnowDatabaseContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("SnowConnection")));
+
             services.AddLogging();
 
             // Services
@@ -59,6 +64,7 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
             services.AddScoped<IGarageDistanceService, GarageDistanceService>();
             services.AddScoped<IGarageEventLogService, GarageEventLogService>();
+            services.AddScoped<ISnowForecastService, SnowForecastService>();
 
             // Repositories
             services.AddScoped<IMessageRepository, MessageRepository>();
@@ -70,6 +76,7 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
             services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
             services.AddScoped<IGarageEventLogRepository, GarageEventLogRepository>();
+            services.AddScoped<ISnowForecastRepository, SnowForecastRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

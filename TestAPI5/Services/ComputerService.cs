@@ -55,7 +55,7 @@ namespace TestAPI5.Services
                 return null;
             }
 
-            var messages = await _messageRepository.ListMessageByComputerIdAsync(computerId, page: 1, pageSize: 10);
+            var messages = await _messageRepository.ListMessageByComputerIdAsync(computerId, page: 1, pageSize: 20);
 
             var computerTaskReturns = messages
                 .Select(m => new ComputerTaskReturn

@@ -10,6 +10,7 @@ using TestAPI5.Contracts.Repositories;
 using TestAPI5.Contracts.Services;
 using TestAPI5.Models;
 using TestAPI5.Repositories;
+using TestAPI5.Serialization;
 using TestAPI5.Services;
 
 namespace TestAPI5
@@ -37,7 +38,13 @@ namespace TestAPI5
                     .AllowAnyMethod());
             });
 
-            services.AddControllers();
+            // Every DateTime returned by this API is a UTC instant -- see UtcDateTimeConverter
+            // for why Npgsql/System.Text.Json need help saying so explicitly.
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new UtcDateTimeConverter());
+                });
 
             services.AddSwaggerGen(c =>
             {

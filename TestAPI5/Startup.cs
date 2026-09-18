@@ -55,6 +55,13 @@ namespace TestAPI5
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            // PermitWatcher's tables live in this same dotnetstuff database (see PermitWatcher's
+            // implementation plan, Cross-cutting decisions) -- PermitDatabaseContext reuses
+            // DefaultConnection rather than a new connection string entry. Kept as a separate
+            // DbContext purely to keep this domain's entities out of the DatabaseContext above.
+            services.AddDbContext<PermitDatabaseContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddLogging();
 
             // Services
@@ -67,6 +74,7 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
             services.AddScoped<IGarageDistanceService, GarageDistanceService>();
             services.AddScoped<IGarageEventLogService, GarageEventLogService>();
+            services.AddScoped<IPermitWatchService, PermitWatchService>();
 
             // Repositories
             services.AddScoped<IMessageRepository, MessageRepository>();
@@ -78,6 +86,8 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
             services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
             services.AddScoped<IGarageEventLogRepository, GarageEventLogRepository>();
+            services.AddScoped<IPermitFindingRepository, PermitFindingRepository>();
+            services.AddScoped<IPermitWatchRepository, PermitWatchRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -24,5 +24,21 @@ namespace TestAPI5.Controllers
 
             return watchConfig;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<PermitWatchReturn>> SaveWatchWindow(SaveWatchWindowRequest request)
+        {
+            var permitWatch = await _permitWatchService.SaveWatchWindowAsync(request);
+
+            return permitWatch;
+        }
+
+        [HttpPost("Exception")]
+        public async Task<ActionResult<PermitWatchReturn>> SaveWatchDateException(SaveWatchDateExceptionRequest request)
+        {
+            var permitWatch = await _permitWatchService.SaveWatchDateExceptionAsync(request);
+
+            return permitWatch;
+        }
     }
 }

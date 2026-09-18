@@ -48,6 +48,64 @@ namespace TestAPI5.Services
                 .ToList();
         }
 
+        public async Task<PermitWatchReturn> SaveWatchWindowAsync(SaveWatchWindowRequest request)
+        {
+            var existing = await _permitWatchRepository.GetWatchWindowAsync(request.PermitId);
+
+            if (existing == null)
+            {
+                _permitWatchRepository.AddWatchWindow(new WatchWindow
+                {
+                    PermitId = request.PermitId,
+                    StartDate = request.StartDate,
+                    EndDate = request.EndDate,
+                    IsActive = request.IsActive,
+                });
+            }
+            else
+            {
+                existing.StartDate = request.StartDate;
+                existing.EndDate = request.EndDate;
+                existing.IsActive = request.IsActive;
+                _permitWatchRepository.UpdateWatchWindow(existing);
+            }
+
+            await _permitWatchRepository.SaveChangesAsync();
+
+            return await GetPermitWatchReturnAsync(request.PermitId);
+        }
+
+        public async Task<PermitWatchReturn> SaveWatchDateExceptionAsync(SaveWatchDateExceptionRequest request)
+        {
+            var existing = await _permitWatchRepository.GetWatchDateExceptionAsync(request.PermitId, request.ExceptionDate);
+
+            if (existing == null)
+            {
+                _permitWatchRepository.AddWatchDateException(new WatchDateException
+                {
+                    PermitId = request.PermitId,
+                    ExceptionDate = request.ExceptionDate,
+                    IsIncluded = request.IsIncluded,
+                });
+            }
+            else
+            {
+                existing.IsIncluded = request.IsIncluded;
+                _permitWatchRepository.UpdateWatchDateException(existing);
+            }
+
+            await _permitWatchRepository.SaveChangesAsync();
+
+            return await GetPermitWatchReturnAsync(request.PermitId);
+        }
+
+        private async Task<PermitWatchReturn> GetPermitWatchReturnAsync(int permitId)
+        {
+            var watchConfig = await ListWatchConfigAsync();
+
+            return watchConfig.FirstOrDefault(w => w.PermitId == permitId);
+        }
+
         private static PermitFindingReturn MapToReturn(PermitFinding finding)
         {
             return new PermitFindingReturn

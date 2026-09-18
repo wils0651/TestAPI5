@@ -9,5 +9,7 @@ namespace TestAPI5.Contracts.Services
     {
         Task<List<PermitFindingReturn>> ListRecentFindingsAsync(DateTime? startDate);
         Task<List<PermitWatchReturn>> ListWatchConfigAsync();
+        Task<PermitWatchReturn> SaveWatchWindowAsync(SaveWatchWindowRequest request);
+        Task<PermitWatchReturn> SaveWatchDateExceptionAsync(SaveWatchDateExceptionRequest request);
     }
 }

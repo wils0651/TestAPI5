@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using TestAPI5.Contracts.Repositories;
 using TestAPI5.Contracts.Services;
 using TestAPI5.Models;
 using TestAPI5.Repositories;
+using TestAPI5.Serialization;
 using TestAPI5.Services;
 
 namespace TestAPI5
@@ -36,7 +38,13 @@ namespace TestAPI5
                     .AllowAnyMethod());
             });
 
-            services.AddControllers();
+            // Every DateTime returned by this API is a UTC instant -- see UtcDateTimeConverter
+            // for why Npgsql/System.Text.Json need help saying so explicitly.
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new UtcDateTimeConverter());
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +60,13 @@ namespace TestAPI5
             services.AddDbContext<SnowDatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("SnowConnection")));
 
+            // PermitWatcher's tables live in this same dotnetstuff database (see PermitWatcher's
+            // implementation plan, Cross-cutting decisions) -- PermitDatabaseContext reuses
+            // DefaultConnection rather than a new connection string entry. Kept as a separate
+            // DbContext purely to keep this domain's entities out of the DatabaseContext above.
+            services.AddDbContext<PermitDatabaseContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddLogging();
 
             // Services
@@ -65,6 +80,7 @@ namespace TestAPI5
             services.AddScoped<IGarageDistanceService, GarageDistanceService>();
             services.AddScoped<IGarageEventLogService, GarageEventLogService>();
             services.AddScoped<ISnowForecastService, SnowForecastService>();
+            services.AddScoped<IPermitWatchService, PermitWatchService>();
 
             // Repositories
             services.AddScoped<IMessageRepository, MessageRepository>();
@@ -77,11 +93,20 @@ namespace TestAPI5
             services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
             services.AddScoped<IGarageEventLogRepository, GarageEventLogRepository>();
             services.AddScoped<ISnowForecastRepository, SnowForecastRepository>();
+            services.AddScoped<IPermitFindingRepository, PermitFindingRepository>();
+            services.AddScoped<IPermitWatchRepository, PermitWatchRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Must run before other middleware so anything relying on the client's real
+            // scheme/IP (behind the planned nginx reverse proxy) sees the forwarded values
+            // instead of the proxy's own.
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             if (env.IsDevelopment())
             {

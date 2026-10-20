@@ -34,10 +34,10 @@ namespace TestAPI5.Services
                     ComputerId = computer.ComputerId,
                     ComputerName = computer.Name,
                     ComputerDescription = computer.Description,
-                    ComputerTaskName = lastMessage.ComputerTask.Name,
-                    MessageDate = lastMessage.CreatedDate,
-                    IpAddress = lastMessage.Computer.IpAddress,
-                    IsStale = DateTime.Now.Subtract(lastMessage.CreatedDate).TotalHours > 24
+                    ComputerTaskName = lastMessage?.ComputerTask.Name,
+                    MessageDate = lastMessage?.CreatedDate ?? DateTime.MinValue,
+                    IpAddress = lastMessage?.Computer.IpAddress,
+                    IsStale = lastMessage != null && DateTime.Now.Subtract(lastMessage.CreatedDate).TotalHours > 24
                 };
 
                 computerInfos.Add(computerInfo);

@@ -55,6 +55,11 @@ namespace TestAPI5
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            // snow_forecasts lives in a separate database (snow_predictor), populated by the
+            // SnowPredictor solution's forecast job — hence the second DbContext/connection string.
+            services.AddDbContext<SnowDatabaseContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("SnowConnection")));
+
             // PermitWatcher's tables live in this same dotnetstuff database (see PermitWatcher's
             // implementation plan, Cross-cutting decisions) -- PermitDatabaseContext reuses
             // DefaultConnection rather than a new connection string entry. Kept as a separate
@@ -74,6 +79,7 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticService, TemperatureStatisticService>();
             services.AddScoped<IGarageDistanceService, GarageDistanceService>();
             services.AddScoped<IGarageEventLogService, GarageEventLogService>();
+            services.AddScoped<ISnowForecastService, SnowForecastService>();
             services.AddScoped<IPermitWatchService, PermitWatchService>();
 
             // Repositories
@@ -86,6 +92,7 @@ namespace TestAPI5
             services.AddScoped<ITemperatureStatisticRepository, TemperatureStatisticRepository>();
             services.AddScoped<IGarageDistanceRepository, GarageDistanceRepository>();
             services.AddScoped<IGarageEventLogRepository, GarageEventLogRepository>();
+            services.AddScoped<ISnowForecastRepository, SnowForecastRepository>();
             services.AddScoped<IPermitFindingRepository, PermitFindingRepository>();
             services.AddScoped<IPermitWatchRepository, PermitWatchRepository>();
         }

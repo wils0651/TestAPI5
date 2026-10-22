@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,44 @@ namespace TestAPI5.Repositories
             return await _context.SnowForecast
                 .Where(f => f.GeneratedAt == latestGeneratedAt)
                 .OrderBy(f => f.TargetDate)
+                .ToListAsync();
+        }
+
+        public async Task<string> GetLatestHindcastModelVersionAsync()
+        {
+            return await _context.SnowHindcast
+                .OrderByDescending(h => h.GeneratedAt)
+                .Select(h => h.ModelVersion)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<DateOnly>> GetHindcastTargetDatesAsync(string modelVersion)
+        {
+            return await _context.SnowHindcast
+                .Where(h => h.ModelVersion == modelVersion)
+                .Select(h => h.TargetDate)
+                .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<List<SnowHindcast>> GetHindcastAsync(
+            string modelVersion, DateOnly from, DateOnly to, IReadOnlyCollection<int> leads)
+        {
+            return await _context.SnowHindcast
+                .AsNoTracking()
+                .Where(h => h.ModelVersion == modelVersion
+                    && h.TargetDate >= from && h.TargetDate <= to
+                    && leads.Contains(h.LeadDays))
+                .OrderBy(h => h.LeadDays).ThenBy(h => h.TargetDate)
+                .ToListAsync();
+        }
+
+        public async Task<List<SnotelObservation>> GetSnotelAsync(string stationId, DateOnly from, DateOnly to)
+        {
+            return await _context.SnotelObservation
+                .AsNoTracking()
+                .Where(o => o.StationId == stationId && o.ObservedOn >= from && o.ObservedOn <= to)
+                .OrderBy(o => o.ObservedOn)
                 .ToListAsync();
         }
     }

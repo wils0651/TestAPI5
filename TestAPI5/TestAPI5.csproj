@@ -31,6 +31,11 @@
     <PackageReference Include="NuGet.Protocol" Version="7.9.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <!-- Transitive via NuGet.Packaging/Protocol (build tooling only, not published). Pinned to a
+         patched version for CVE-2026-70162 / CVE-2026-84008; remove once NuGet.* pulls >= 10.0.13. -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.14">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

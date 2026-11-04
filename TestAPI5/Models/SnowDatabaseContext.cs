@@ -12,11 +12,13 @@ namespace TestAPI5.Models
         public DbSet<SnowForecast> SnowForecast { get; set; }
         public DbSet<SnowHindcast> SnowHindcast { get; set; }
         public DbSet<SnotelObservation> SnotelObservation { get; set; }
+        public DbSet<ModelEvaluation> ModelEvaluation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SnowHindcast>().HasKey(h => new { h.ModelVersion, h.TargetDate, h.LeadDays });
             modelBuilder.Entity<SnotelObservation>().HasKey(o => new { o.StationId, o.ObservedOn });
+            modelBuilder.Entity<ModelEvaluation>().HasKey(e => new { e.ModelVersion, e.EvaluatedAt, e.Metric });
         }
     }
 }

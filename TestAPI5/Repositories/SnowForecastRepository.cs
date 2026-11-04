@@ -67,5 +67,13 @@ namespace TestAPI5.Repositories
                 .OrderBy(o => o.ObservedOn)
                 .ToListAsync();
         }
+
+        public async Task<List<ModelEvaluation>> GetModelEvaluationsAsync()
+        {
+            return await _context.ModelEvaluation
+                .AsNoTracking()
+                .OrderBy(e => e.EvaluatedAt).ThenBy(e => e.Metric)
+                .ToListAsync();
+        }
     }
 }

@@ -12,7 +12,7 @@ cd "$PROJECT_DIR"
 dotnet publish -c Release -r linux-x64 --no-self-contained -o ./publish
 
 echo "Ensuring ${VM_DEPLOY_DIR} exists on the VM..."
-ssh -t ${VM_USER}@${VM_HOST} "sudo mkdir -p ${VM_DEPLOY_DIR} && sudo chown ${VM_USER}: ${VM_DEPLOY_DIR}"
+ssh -t ${VM_USER}@${VM_HOST} "test -d ${VM_DEPLOY_DIR} || (sudo mkdir -p ${VM_DEPLOY_DIR} && sudo chown ${VM_USER}: ${VM_DEPLOY_DIR})"
 
 echo "Copying to VM..."
 rsync -avz --delete ./publish/ ${VM_USER}@${VM_HOST}:${VM_DEPLOY_DIR}/

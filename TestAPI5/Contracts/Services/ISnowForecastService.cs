@@ -9,5 +9,6 @@ namespace TestAPI5.Contracts.Services
         Task<List<SnowForecastReturn>> GetLatestForecastAsync();
         Task<SnowHindcastSeasonsReturn> GetHindcastSeasonsAsync();
         Task<SnowHindcastReturn> GetHindcastAsync(int season, IReadOnlyCollection<int> leads);
+        Task<SnowModelEvaluationsReturn> GetModelEvaluationsAsync();
     }
 }

@@ -96,6 +96,30 @@ namespace TestAPI5.Services
             return result;
         }
 
+        public async Task<SnowModelEvaluationsReturn> GetModelEvaluationsAsync()
+        {
+            var rows = await _snowForecastRepository.GetModelEvaluationsAsync();
+
+            // One evaluation = every metric row sharing (model_version, evaluated_at).
+            var evaluations = rows
+                .GroupBy(r => new { r.ModelVersion, r.EvaluatedAt })
+                .OrderBy(g => g.Key.EvaluatedAt)
+                .Select(g => new SnowModelEvaluation
+                {
+                    ModelVersion = g.Key.ModelVersion,
+                    EvaluatedAt = g.Key.EvaluatedAt,
+                    HoldoutSeasons = g.First().HoldoutSeasons,
+                    NDays = g.First().NDays,
+                    Notes = g.Select(r => r.Notes).FirstOrDefault(n => !string.IsNullOrEmpty(n)),
+                    Metrics = g.ToDictionary(
+                        r => r.Metric,
+                        r => new SnowModelMetric { Value = r.Value, CiLow = r.CiLow, CiHigh = r.CiHigh })
+                })
+                .ToList();
+
+            return new SnowModelEvaluationsReturn { Evaluations = evaluations };
+        }
+
         /// <summary>
         /// Observed daily snowfall, using the same definition the model is trained on (the SNOTEL
         /// "target" in snow-model-trainer/features.py `load_snotel_daily` and the SnowPredictor

@@ -13,5 +13,7 @@ namespace TestAPI5.Contracts.Repositories
         Task<List<DateOnly>> GetHindcastTargetDatesAsync(string modelVersion);
         Task<List<SnowHindcast>> GetHindcastAsync(string modelVersion, DateOnly from, DateOnly to, IReadOnlyCollection<int> leads);
         Task<List<SnotelObservation>> GetSnotelAsync(string stationId, DateOnly from, DateOnly to);
+
+        Task<List<ModelEvaluation>> GetModelEvaluationsAsync();
     }
 }

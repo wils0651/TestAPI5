@@ -32,6 +32,12 @@ namespace TestAPI5.Controllers
             return await _snowForecastService.GetHindcastSeasonsAsync();
         }
 
+        [HttpGet("Evaluations")]
+        public async Task<ActionResult<SnowModelEvaluationsReturn>> GetModelEvaluations()
+        {
+            return await _snowForecastService.GetModelEvaluationsAsync();
+        }
+
         // leads is a comma-separated list of lead days, e.g. "7,14".
         [HttpGet("Hindcast")]
         public async Task<ActionResult<SnowHindcastReturn>> GetHindcast([FromQuery] int season, [FromQuery] string leads = "7,14")

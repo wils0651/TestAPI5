@@ -156,6 +156,7 @@ namespace TestAPI5.Services
                 TargetDate = forecast.TargetDate,
                 LeadDays = forecast.LeadDays,
                 PredictedSnowInches = forecast.PredictedSnowInches,
+                SnowProbability = forecast.SnowProbability,
                 IsEvent = forecast.IsEvent,
                 GeneratedAt = forecast.GeneratedAt,
                 WindowEndDate = forecast.WindowEndDate,

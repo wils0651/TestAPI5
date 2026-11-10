@@ -26,6 +26,10 @@ namespace TestAPI5.Models
         [Column("predicted_snow_inches")]
         public double PredictedSnowInches { get; set; }
 
+        // Calibrated P(snow) from SnowPredictor's weather-model forecast; null for buoy-LSTM rows.
+        [Column("snow_probability")]
+        public double? SnowProbability { get; set; }
+
         [Column("is_event")]
         public bool IsEvent { get; set; }
 
